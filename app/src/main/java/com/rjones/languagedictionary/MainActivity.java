@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("Insert: ", "Inserting ..");
         readInFileToDatabase(db, R.raw.spanish,"^");
 
-        //Display data that is imported to database // issue: only imports 13 rows
+//        Display data that is imported to database // issue: only imports 13 rows
 //        Log.d("Reading: ", "Reading all words..");
 //        ArrayList<Word> words = db.getAllWords();
 //        // foreach loop
@@ -254,6 +255,9 @@ public class MainActivity extends AppCompatActivity {
     NotificationCompat.Builder notification;
     private static final int UNIQUE_ID = 543701; // the notification has to be assigned
 
+
+    // Swipe notification to ignore.
+    // Tap notification to reset categories
 
     public void notifyCategoryHidden(String notification_msg, String title, String description) {
         Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
