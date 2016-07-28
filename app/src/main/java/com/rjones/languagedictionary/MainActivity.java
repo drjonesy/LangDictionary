@@ -57,17 +57,17 @@ public class MainActivity extends AppCompatActivity {
         readInFileToDatabase(db, R.raw.spanish,"^");
 
         //Display data that is imported to database // issue: only imports 13 rows
-        Log.d("Reading: ", "Reading all words..");
-        ArrayList<Word> words = db.getAllWords();
-        // foreach loop
-        for (Word word: words){
-            String log =  " [id] "       + word.getId()
-                    + " [foreign] "  + word.getForeignLang()
-                    + " [native] "   + word.getNativeLang()
-                    + " [category] " + word.getCategory();
-            //Writing shops to log
-            Log.d("Shop: ", log);
-        }
+//        Log.d("Reading: ", "Reading all words..");
+//        ArrayList<Word> words = db.getAllWords();
+//        // foreach loop
+//        for (Word word: words){
+//            String log =  " [id] "       + word.getId()
+//                    + " [foreign] "  + word.getForeignLang()
+//                    + " [native] "   + word.getNativeLang()
+//                    + " [category] " + word.getCategory();
+//            //Writing shops to log
+//            Log.d("Shop: ", log);
+//        }
 
 
 
