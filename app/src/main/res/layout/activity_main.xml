@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.rjones.languagedictionary.MainActivity">
+
+    <TextView
+        android:id="@+id/greetingsTextView"
+        style="@style/CategoryStyle"
+        android:background="@color/category_greeting"
+        android:text="@string/greetings_text_view"/>
+
+    <TextView
+        android:id="@+id/questionsTextView"
+        style="@style/CategoryStyle"
+        android:background="@color/category_question"
+        android:text="@string/questions_text_view"/>
+
+    <TextView
+        android:id="@+id/requestsTextView"
+        style="@style/CategoryStyle"
+        android:background="@color/category_request"
+        android:text="@string/requests_text_view"/>
+    <TextView
+        android:id="@+id/declarationsTextView"
+        style="@style/CategoryStyle"
+        android:background="@color/category_declaration"
+        android:text="@string/declarations_text_view"/>
+
+</LinearLayout>

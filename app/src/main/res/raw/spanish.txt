@@ -1,0 +1,44 @@
+Dilo asi^Say it like this^declaration
+Buenos dias^Good morning^greeting
+Como estas?^How are you^question
+Buenas tardes^Good afternoon^greeting
+Buenas noches^Good evening^greeting
+Ayudame, por favor.^Help me please.^request
+Te ayudo?^Can I help you?^question
+Por favor^Please^request
+Gracias^Thank you^greeting
+De nada^You're welcome^greeting
+Tenemos que irnos en ... minutos^We have to go in ... minutes.^declaration
+Cuantos hay?^How many are there?^question
+Mira!^Look!^request
+te' cuidas^Be careful.^request
+Dame la mano.^Give me your hand.^request
+Toma mi mano.^Take my hand.^request
+Sientate.^Sit down.^request
+Sientate.^Sit down.^request
+Silencio^Be quiet.^request
+Ven aca.^Come here.^request
+No toques.^Don't touch.^request
+Camina, por favor.^Walk, please.^request
+No corras.^Don't run.^request
+Recoger la basura^Pick up your things^request
+Me gusta^I like it.^declaration
+Te gusta?^Do you like it?^question
+Dime otra vez.^Tell me again.^request
+Hazlo de nuevo^Do it again.^request
+Me encanta.^I love it.^declaration
+Bien hecho.^Well done.^declaration
+Intenta otra vez.^Try again.^request
+Donde estas?^Where are you?^question
+Ganaste.^You won.^declaration
+Gane.^I won.^declaration
+Me toca.^It's my turn.^declaration
+Te toca.^It's your turn.^declaration
+Quieres agua?^Do you want some water?^question
+Tienes hambre?^Are you hungry?^question
+A comer^Come eat.^request
+Come.^Eat.^declaration
+Quieres mas?^Do you want more?^question
+Acabaste?^Are you done?^question
+Buenas noches^Good night^greeting
+Te adoro.^I love you (I adore you)^declaration

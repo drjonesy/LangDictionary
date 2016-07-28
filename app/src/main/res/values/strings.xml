@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Language Dictionary</string>
+    <string name="greetings_text_view">Greetings</string>
+    <string name="questions_text_view">Questions</string>
+    <string name="requests_text_view">Requests</string>
+    <string name="declarations_text_view">Declarations</string>
+</resources>
