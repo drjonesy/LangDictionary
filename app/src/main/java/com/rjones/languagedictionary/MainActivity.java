@@ -1,9 +1,14 @@
 package com.rjones.languagedictionary;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,11 +33,23 @@ public class MainActivity extends AppCompatActivity {
     public static String getCategoryWord(){return mCategoryWord;}
     public static int getCategoryColor(){return mCategoryColor;}
 
+    //Reference to Categories
+    private TextView greetingsTextView;
+    private TextView questionsTextView;
+    private TextView requestsTextView;
+    private TextView declarationsTextView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Reference to Categories
+        greetingsTextView = (TextView) findViewById(R.id.greetingsTextView);
+        questionsTextView = (TextView) findViewById(R.id.questionsTextView);
+        requestsTextView = (TextView) findViewById(R.id.requestsTextView);
+        declarationsTextView = (TextView) findViewById(R.id.declarationsTextView);
 
         DBHandler db = new DBHandler(this);
         //Inserting Shop/Rows
@@ -52,10 +69,18 @@ public class MainActivity extends AppCompatActivity {
             Log.d("Shop: ", log);
         }
 
+
+
+        //-------------------------------------------------
+            //build the new notification
+            notification = new NotificationCompat.Builder(this);
+            //remove notification once it has been visited
+            notification.setAutoCancel(true);
+        //-------------------------------------------------
+
         //=======click events
         //greetings
-        TextView greetings = (TextView) findViewById(R.id.greetingsTextView);
-        greetings.setOnClickListener(new View.OnClickListener() {
+        greetingsTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //set category word
@@ -68,8 +93,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //questions
-        TextView questions = (TextView) findViewById(R.id.questionsTextView);
-        questions.setOnClickListener(new View.OnClickListener() {
+        questionsTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //set category word
@@ -82,8 +106,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //requests
-        TextView requests = (TextView) findViewById(R.id.requestsTextView);
-        requests.setOnClickListener(new View.OnClickListener() {
+        requestsTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //set category word
@@ -96,8 +119,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //declaration
-        TextView declarations = (TextView) findViewById(R.id.declarationsTextView);
-        declarations.setOnClickListener(new View.OnClickListener() {
+        declarationsTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //set category word
@@ -108,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
 
     }//END onCreate
 
@@ -170,20 +193,15 @@ public class MainActivity extends AppCompatActivity {
             The action bar will automatically handle clicks on the Home/Up button,
             so long as you specify a parent activity in the AndroidManifest.xml
         */
-        //Reference to Categories
-        TextView greetingsTextView = (TextView) findViewById(R.id.greetingsTextView);
-        TextView questionsTextView = (TextView) findViewById(R.id.questionsTextView);
-        TextView requestsTextView = (TextView) findViewById(R.id.requestsTextView);
-        TextView declarationsTextView = (TextView) findViewById(R.id.declarationsTextView);
 
-
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             //==== HIDE/SHOW Greetings Category
             case R.id.menu_greetings:
-                if(item.isChecked()){
+                if (item.isChecked()) {
                     item.setChecked(false);
                     greetingsTextView.setVisibility(View.GONE);
-                }else{
+                    notifyCategoryHidden("Greetings disabled","Greetings Category","Re-enable category by checking menu option!");
+                } else {
                     item.setChecked(true);
                     greetingsTextView.setVisibility(View.VISIBLE);
                 }
@@ -191,10 +209,11 @@ public class MainActivity extends AppCompatActivity {
 
             //==== HIDE/SHOW Questions Category
             case R.id.menu_questions:
-                if(item.isChecked()){
+                if (item.isChecked()) {
                     item.setChecked(false);
+                    notifyCategoryHidden("Questions disabled","Questions Category","Re-enable category by checking menu option!");
                     questionsTextView.setVisibility(View.GONE);
-                }else{
+                } else {
                     item.setChecked(true);
                     questionsTextView.setVisibility(View.VISIBLE);
                 }
@@ -202,10 +221,11 @@ public class MainActivity extends AppCompatActivity {
 
             //==== HIDE/SHOW Requests Category
             case R.id.menu_requests:
-                if(item.isChecked()){
+                if (item.isChecked()) {
                     item.setChecked(false);
+                    notifyCategoryHidden("Requests disabled","Requests Category","Re-enable category by checking menu option!");
                     requestsTextView.setVisibility(View.GONE);
-                }else{
+                } else {
                     item.setChecked(true);
                     requestsTextView.setVisibility(View.VISIBLE);
                 }
@@ -213,17 +233,46 @@ public class MainActivity extends AppCompatActivity {
 
             //==== HIDE/SHOW Declarations Category
             case R.id.menu_declarations:
-                if(item.isChecked()){
+                if (item.isChecked()) {
                     item.setChecked(false);
+                    notifyCategoryHidden("Declarations disabled","Declarations Category","Re-enable category by checking menu option!");
                     declarationsTextView.setVisibility(View.GONE);
-                }else{
+                } else {
                     item.setChecked(true);
                     declarationsTextView.setVisibility(View.VISIBLE);
                 }
                 return true;
 
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+        }//END switch
+        return super.onOptionsItemSelected(item);
+
+    }//onOptionsItemSelected
+
+
+    //=============================== NOTIFICATION VARIABLES AND METHODS
+    // build the object that is going to be the notification itself
+    NotificationCompat.Builder notification;
+    private static final int UNIQUE_ID = 543701; // the notification has to be assigned
+
+
+    public void notifyCategoryHidden(String notification_msg, String title, String description) {
+        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+        notification.setSmallIcon(R.mipmap.ic_launcher);
+        notification.setTicker(notification_msg);
+        notification.setWhen(System.currentTimeMillis());
+        notification.setContentTitle(title);
+        notification.setContentText(description);
+        notification.setSound(alarmSound);
+
+        //send out the notification - Intent
+        Intent i = new Intent(this, MainActivity.class);
+        //give the device access to perform this intent by calling the PendingIntent
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,0,i, PendingIntent.FLAG_UPDATE_CURRENT);
+        notification.setContentIntent(pendingIntent);
+
+        //send out the notification
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.notify(UNIQUE_ID, notification.build());
     }
 }
