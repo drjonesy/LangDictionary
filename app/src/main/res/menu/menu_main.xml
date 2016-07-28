@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Creates group, checkableBehavior single value means
+    the user can only select one at a time -->
+    <item
+        android:title="Show/Hide Category"/>
+
+    <group android:checkableBehavior="all">
+        <item
+            android:id="@+id/menu_greetings"
+            android:orderInCategory="1"
+            app:showAsAction="never"
+            android:title="@string/hide_show_greetings"
+            android:checked="true"/>
+
+        <item
+            android:id="@+id/menu_questions"
+            android:orderInCategory="2"
+            app:showAsAction="never"
+            android:title="@string/hide_show_questions"
+            android:checked="true"/>
+
+        <item
+            android:id="@+id/menu_requests"
+            android:orderInCategory="3"
+            app:showAsAction="never"
+            android:title="@string/hide_show_requests"
+            android:checked="true"/>
+
+        <item
+            android:id="@+id/menu_declarations"
+            android:orderInCategory="4"
+            app:showAsAction="never"
+            android:title="@string/hide_show_declarations"
+            android:checked="true"/>
+    </group>
+</menu>

@@ -4,4 +4,9 @@
     <string name="questions_text_view">Questions</string>
     <string name="requests_text_view">Requests</string>
     <string name="declarations_text_view">Declarations</string>
+
+    <string name="hide_show_declarations">Declarations</string>
+    <string name="hide_show_requests">Requests</string>
+    <string name="hide_show_questions">Questions</string>
+    <string name="hide_show_greetings">Greetings</string>
 </resources>

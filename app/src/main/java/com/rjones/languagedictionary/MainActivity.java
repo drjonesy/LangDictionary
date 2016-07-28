@@ -1,10 +1,15 @@
 package com.rjones.languagedictionary;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -22,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     //getters
     public static String getCategoryWord(){return mCategoryWord;}
     public static int getCategoryColor(){return mCategoryColor;}
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,4 +150,80 @@ public class MainActivity extends AppCompatActivity {
         }
 
     } //END readInFileToDatabase
+
+
+    //=============================== MENU OPTIONS AND SETUP
+
+    // add the items to menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    // adds functionality to the menu
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+       /*   Handle action bar item clicks here.
+            The action bar will automatically handle clicks on the Home/Up button,
+            so long as you specify a parent activity in the AndroidManifest.xml
+        */
+        //Reference to Categories
+        TextView greetingsTextView = (TextView) findViewById(R.id.greetingsTextView);
+        TextView questionsTextView = (TextView) findViewById(R.id.questionsTextView);
+        TextView requestsTextView = (TextView) findViewById(R.id.requestsTextView);
+        TextView declarationsTextView = (TextView) findViewById(R.id.declarationsTextView);
+
+
+        switch (item.getItemId()){
+            //==== HIDE/SHOW Greetings Category
+            case R.id.menu_greetings:
+                if(item.isChecked()){
+                    item.setChecked(false);
+                    greetingsTextView.setVisibility(View.GONE);
+                }else{
+                    item.setChecked(true);
+                    greetingsTextView.setVisibility(View.VISIBLE);
+                }
+                return true;
+
+            //==== HIDE/SHOW Questions Category
+            case R.id.menu_questions:
+                if(item.isChecked()){
+                    item.setChecked(false);
+                    questionsTextView.setVisibility(View.GONE);
+                }else{
+                    item.setChecked(true);
+                    questionsTextView.setVisibility(View.VISIBLE);
+                }
+                return true;
+
+            //==== HIDE/SHOW Requests Category
+            case R.id.menu_requests:
+                if(item.isChecked()){
+                    item.setChecked(false);
+                    requestsTextView.setVisibility(View.GONE);
+                }else{
+                    item.setChecked(true);
+                    requestsTextView.setVisibility(View.VISIBLE);
+                }
+                return true;
+
+            //==== HIDE/SHOW Declarations Category
+            case R.id.menu_declarations:
+                if(item.isChecked()){
+                    item.setChecked(false);
+                    declarationsTextView.setVisibility(View.GONE);
+                }else{
+                    item.setChecked(true);
+                    declarationsTextView.setVisibility(View.VISIBLE);
+                }
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }
