@@ -105,4 +105,15 @@ public class DBHandler extends SQLiteOpenHelper {
         //return word list
         return wordList;
     }
+
+    // Getting one row
+    public boolean hasAtLeastOneShop() {
+        boolean values = false;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_WORDS, new String[] { WORD_ID }, WORD_ID + "=1",
+                null, null, null, null, null);
+        if (cursor != null)
+            values = true;
+        return values;
+    }
 }

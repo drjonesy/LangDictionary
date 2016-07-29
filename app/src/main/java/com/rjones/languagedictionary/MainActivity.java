@@ -52,10 +52,15 @@ public class MainActivity extends AppCompatActivity {
         requestsTextView = (TextView) findViewById(R.id.requestsTextView);
         declarationsTextView = (TextView) findViewById(R.id.declarationsTextView);
 
-        DBHandler db = new DBHandler(this);
+
         //Inserting Shop/Rows
-        Log.d("Insert: ", "Inserting ..");
-        readInFileToDatabase(db, R.raw.spanish,"^");
+//        Log.d("Insert: ", "Inserting ..");
+        DBHandler db = new DBHandler(this);
+        //if first row doesn't exist populate database
+        if (db.hasAtLeastOneShop()){
+            readInFileToDatabase(db, R.raw.spanish,"^");
+        }
+
 
 //        Display data that is imported to database // issue: only imports 13 rows
 //        Log.d("Reading: ", "Reading all words..");
@@ -152,6 +157,8 @@ public class MainActivity extends AppCompatActivity {
         String cat;
         try{
             inFile = new Scanner(getResources().openRawResource(rawFile));
+            //temp fix delete all// no duplicates
+
             //continue while file has nextLine
             while(inFile.hasNextLine()){
                 //read line
@@ -167,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
                 //add external file row to new database row
                 db.addWord(new Word(foreignLang, nativeLang, cat));
             }
+            inFile.close();
 
         } catch (Exception e){
             Log.v("Message: ",e.getMessage());
