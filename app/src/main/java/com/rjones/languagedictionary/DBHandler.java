@@ -32,7 +32,7 @@ public class DBHandler extends SQLiteOpenHelper {
         //Create Table Query for Database
         String QUERY_CREATE_TABLE_WORDS = "CREATE TABLE " + TABLE_WORDS + " ("
                 + WORD_ID           + " "   + "INTEGER PRIMARY KEY AUTOINCREMENT"   + ", "
-                + WORD_FOREIGN      + " "   + "TEXT"                                + ", "
+                + WORD_FOREIGN      + " "   + "TEXT UNIQUE"                         + ", "
                 + WORD_NATIVE       + " "   + "TEXT"                                + ", "
                 + WORD_CATEGORY     + " "   + "TEXT"                                + ");";
         //Run Query
@@ -106,14 +106,5 @@ public class DBHandler extends SQLiteOpenHelper {
         return wordList;
     }
 
-    // Getting one row
-    public boolean hasAtLeastOneShop() {
-        boolean values = false;
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_WORDS, new String[] { WORD_ID }, WORD_ID + "=1",
-                null, null, null, null, null);
-        if (cursor != null)
-            values = true;
-        return values;
-    }
+
 }

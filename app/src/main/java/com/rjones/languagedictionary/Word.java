@@ -2,8 +2,8 @@ package com.rjones.languagedictionary;
 
 public class Word {
     private int mId;
-    private String mNativeLang;
     private String mForeignLang;
+    private String mNativeLang;
     private String mCategory;
 
     //Constructors
@@ -11,16 +11,16 @@ public class Word {
     public Word() {
     }
 
-    public Word(String nativeLang, String foreignLang, String category) {
-        mNativeLang = nativeLang;
+    public Word(String foreignLang, String nativeLang, String category) {
         mForeignLang = foreignLang;
+        mNativeLang = nativeLang;
         mCategory = category;
     }
 
-    public Word(int id, String nativeLang, String foreignLang, String category) {
+    public Word(int id, String foreignLang, String nativeLang, String category) {
         mId = id;
-        mNativeLang = nativeLang;
         mForeignLang = foreignLang;
+        mNativeLang = nativeLang;
         mCategory = category;
     }
 

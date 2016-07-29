@@ -56,10 +56,9 @@ public class MainActivity extends AppCompatActivity {
         //Inserting Shop/Rows
 //        Log.d("Insert: ", "Inserting ..");
         DBHandler db = new DBHandler(this);
-        //if first row doesn't exist populate database
-        if (db.hasAtLeastOneShop()){
+        //Try Shared Preferences ----
             readInFileToDatabase(db, R.raw.spanish,"^");
-        }
+
 
 
 //        Display data that is imported to database // issue: only imports 13 rows
@@ -173,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //add external file row to new database row
                 db.addWord(new Word(foreignLang, nativeLang, cat));
+
             }
             inFile.close();
 
