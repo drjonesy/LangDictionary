@@ -293,11 +293,6 @@ public class MainActivity extends AppCompatActivity {
         notification.setContentText(description);
         notification.setSound(alarmSound);
 
-        //send out the notification - Intent
-        Intent i = new Intent(this, MainActivity.class);
-        //give the device access to perform this intent by calling the PendingIntent
-        PendingIntent pendingIntent = PendingIntent.getActivity(this,0,i, PendingIntent.FLAG_UPDATE_CURRENT);
-        notification.setContentIntent(pendingIntent);
 
         //send out the notification
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
