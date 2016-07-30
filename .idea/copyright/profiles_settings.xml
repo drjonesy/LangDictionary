@@ -1,3 +1,7 @@
 <component name="CopyrightManager">
-  <settings default="" />
+  <settings default="COM262Final">
+    <module2copyright>
+      <element module="All" copyright="COM262Final" />
+    </module2copyright>
+  </settings>
 </component>

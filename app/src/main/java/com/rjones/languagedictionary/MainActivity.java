@@ -1,5 +1,18 @@
+/*
+ * Copyright (c) 2016.
+ * Created by Ryan Jones
+ * This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+ * License for more details. You should have received a copy of the GNU General Public License along with this
+ * program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package com.rjones.languagedictionary;
 
+import android.app.Application;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -17,6 +30,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.rjones.languagedictionary.EULA.SimpleEula;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -46,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        new SimpleEula(this).show();
+
         //Reference to Categories
         greetingsTextView = (TextView) findViewById(R.id.greetingsTextView);
         questionsTextView = (TextView) findViewById(R.id.questionsTextView);
@@ -53,27 +70,10 @@ public class MainActivity extends AppCompatActivity {
         declarationsTextView = (TextView) findViewById(R.id.declarationsTextView);
 
 
-        //Inserting Shop/Rows
-//        Log.d("Insert: ", "Inserting ..");
-        DBHandler db = new DBHandler(this);
-        //Try Shared Preferences ----
+
+        //Insert Data into Database ----
+        DBHandler db = new DBHandler(MainActivity.this);
             readInFileToDatabase(db, R.raw.spanish,"^");
-
-
-
-//        Display data that is imported to database // issue: only imports 13 rows
-//        Log.d("Reading: ", "Reading all words..");
-//        ArrayList<Word> words = db.getAllWords();
-//        // foreach loop
-//        for (Word word: words){
-//            String log =  " [id] "       + word.getId()
-//                    + " [foreign] "  + word.getForeignLang()
-//                    + " [native] "   + word.getNativeLang()
-//                    + " [category] " + word.getCategory();
-//            //Writing shops to log
-//            Log.d("Shop: ", log);
-//        }
-
 
 
         //-------------------------------------------------
@@ -93,6 +93,10 @@ public class MainActivity extends AppCompatActivity {
                 //set category color
                 setCategoryColor(R.color.category_greeting);
                 Intent intent = new Intent(MainActivity.this, CategoriesActivity.class);
+                //change intent title
+                String label = "Greetings";
+                intent.putExtra("key", label);
+                //open activity
                 startActivity(intent);
             }
         });
@@ -106,6 +110,10 @@ public class MainActivity extends AppCompatActivity {
                 //set category color
                 setCategoryColor(R.color.category_question);
                 Intent intent = new Intent(MainActivity.this, CategoriesActivity.class);
+                //change intent title
+                String label = "Questions";
+                intent.putExtra("key", label);
+                //open activity
                 startActivity(intent);
             }
         });
@@ -119,6 +127,10 @@ public class MainActivity extends AppCompatActivity {
                 //set category color
                 setCategoryColor(R.color.category_request);
                 Intent intent = new Intent(MainActivity.this, CategoriesActivity.class);
+                //change intent title
+                String label = "Requests";
+                intent.putExtra("key", label);
+                //open activity
                 startActivity(intent);
             }
         });
@@ -132,6 +144,10 @@ public class MainActivity extends AppCompatActivity {
                 //set category color
                 setCategoryColor(R.color.category_declaration);
                 Intent intent = new Intent(MainActivity.this, CategoriesActivity.class);
+                //change intent title
+                String label = "Declarations";
+                intent.putExtra("key", label);
+                //open activity
                 startActivity(intent);
             }
         });
