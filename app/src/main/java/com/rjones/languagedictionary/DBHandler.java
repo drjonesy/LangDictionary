@@ -1,3 +1,15 @@
+/*
+ * Copyright (c) 2016.
+ * Created by Ryan Jones
+ * This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+ * License for more details. You should have received a copy of the GNU General Public License along with this
+ * program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package com.rjones.languagedictionary;
 
 import android.content.ContentValues;
@@ -27,14 +39,17 @@ public class DBHandler extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    //The foreign word is set UNIQUE so duplicates are not created when the onCreate Method is Run in the Main
     @Override
     public void onCreate(SQLiteDatabase db) {
         //Create Table Query for Database
         String QUERY_CREATE_TABLE_WORDS = "CREATE TABLE " + TABLE_WORDS + " ("
                 + WORD_ID           + " "   + "INTEGER PRIMARY KEY AUTOINCREMENT"   + ", "
-                + WORD_FOREIGN      + " "   + "TEXT"                                + ", "
+                + WORD_FOREIGN      + " "   + "TEXT UNIQUE"                         + ", "
                 + WORD_NATIVE       + " "   + "TEXT"                                + ", "
                 + WORD_CATEGORY     + " "   + "TEXT"                                + ");";
+        //Query that reads data into Table
+
         //Run Query
         db.execSQL(QUERY_CREATE_TABLE_WORDS);
     }
@@ -105,4 +120,7 @@ public class DBHandler extends SQLiteOpenHelper {
         //return word list
         return wordList;
     }
+
+
+
 }
